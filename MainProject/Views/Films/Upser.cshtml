@@ -1,0 +1,68 @@
+﻿@model Movie
+@{
+    var create = ViewBag.CreateMode;
+}
+<h1>@(create ? "Create" : "Edit") Product Form</h1>
+
+<form class="row g-3" method="post" asp-action="@(create ? "Create" : "Edit")">
+
+    <div class="col-2">
+        <label asp-for=Id class="form-label">Id</label>
+        <input asp-for=Id readonly type="text" placeholder="Generated" class="form-control">
+    </div>
+
+    <div class="col-10">
+        <label asp-for=Name class="form-label">Title</label>
+        <input asp-for=Name type="text" class="form-control" placeholder="Enter film name">
+        <span class="small text-danger" asp-validation-for="Name"></span>
+    </div>
+
+    <div class="col-md-5">
+        <label asp-for=Lenght class="form-label">Price</label>
+        <div class="input-group">
+            <input required asp-for=Lenght type="number" min="0" step="0.01" class="form-control" placeholder="Enter film length">
+            <span class="input-group-text">$</span>
+        </div>
+        <span class="small text-danger" asp-validation-for="Lenght"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for=Rating class="form-label">Rating</label>
+        <div class="input-group">
+            <input asp-for=Rating type="number" value="0" min="0" max="100" class="form-control" placeholder="Enter film rating">
+            <span class="input-group-text">%</span>
+        </div>
+        <span class="small text-danger" asp-validation-for="Rating"></span>
+    </div>
+    <div class="col-md-3">
+        <label asp-for=AdultRating class="form-label">Adult rating</label>
+        <input required asp-for=AdultRating value="0" type="number" min="0" class="form-control" placeholder="Enter adult rating">
+        <span class="small text-danger" asp-validation-for="AdultRating"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for=FilmGenres class="form-label">Genre</label>
+        <select asp-for=FilmGenres asp-items=@ViewBag.Categories class="form-select">
+            <option disabled selected>Choose film genre...</option>
+        </select>
+        <span class="small text-danger" asp-validation-for="FilmGenres"></span>
+    </div>
+
+    <div class="col-6">
+        <label asp-for=ImageUrl class="form-label">Image URL</label>
+        <input asp-for=ImageUrl type="text" class="form-control" placeholder="Enter film image URL">
+        <span class="small text-danger" asp-validation-for="ImageUrl"></span>
+    </div>
+
+    <div class="col-md-6">
+        <a asp-action="Index" class="btn btn-dark w-100">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
+    </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-plus-lg"></i>
+            @(create ? "Create" : "Edit")
+        </button>
+    </div>
+</form>
