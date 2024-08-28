@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Data;
 using Data.Entities;
 using AutoMapper;
+using Core.Dtos;
 
 namespace MainProject.Controllers
 {
@@ -25,9 +26,10 @@ namespace MainProject.Controllers
             // ... load data from database ...
             var products = context.Movie
                 .Include(x => x.FilmGenres) // LEFT JOIN
+                .ThenInclude(x => x.Genre)
                 .ToList();
 
-            return View(products);
+            return View(mapper.Map<List<MovieDto>>(products));
         }
 
         // GET - open create page

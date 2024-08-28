@@ -11,6 +11,6 @@ namespace Core.Dtos
         public string? ImageUrl { get; set; }
         public int Rating { get; set; }
         public int AdultRating { get; set; }
-        public ICollection<FilmGenre> FilmGenres { get; set; }
+        public ICollection<string> Genres { get; set; }
     }
 }

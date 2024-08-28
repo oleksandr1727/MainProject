@@ -9,8 +9,9 @@ namespace Core.MapperProfiles
     {
         public AppProfile()
         {
-            CreateMap<MovieDto, Movie>().ReverseMap();
-            //.ForMember(x => x.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
+            CreateMap<MovieDto, Movie>();
+            CreateMap<Movie, MovieDto>()
+                .ForMember(x => x.Genres, opt => opt.MapFrom(src => src.FilmGenres.Select(x => x.Genre.Name)));
         }
     }
 }

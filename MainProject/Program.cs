@@ -8,6 +8,8 @@ using MainProject.Services;
 using Microsoft.AspNetCore.Identity;
 using Data.Entities;
 using MainProject.Services;
+using Core.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 string connectionString = builder.Configuration.GetConnectionString("MoviesDbContextConnection")!;
@@ -41,6 +43,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IFavoriteService, FavoritesService>();
 
 var app = builder.Build();

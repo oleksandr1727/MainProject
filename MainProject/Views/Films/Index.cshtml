@@ -1,38 +1,71 @@
-﻿@using Data.Entities
-@model List<Movie>
+﻿@using Core.Dtos;
+@model List<MovieDto>
 
 <h1>Products List</h1>
 <p>You can manage the products here.</p>
 
-<a asp-controller="Films"></a><a asp-action="Create" class="btn btn-primary mb-3">
+<a asp-action="Create" class="btn btn-primary mb-3">
     <i class="bi bi-plus-lg"></i>
     Add New Product
 </a>
 
-<table class="table">
+<table class="table product-table">
     <thead>
         <tr class="table-dark">
             <th scope="col">#</th>
+            <th class="text-center" scope="col">Image</th>
             <th scope="col">Name</th>
             <th scope="col">Length</th>
             <th scope="col">Rating</th>
-            <th scope="col">Adult rating</th>
+            <th scope="col">AdultRating</th>
             <th scope="col">Genre</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Redacting</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var i in Model)
         {
             <tr class="align-middle">
+                <th scope="row">@i.Id</th>
+                <td class="text-center">
+                    <img height="40" src="@i.ImageUrl" alt="@i.Name" />
+                </td>
                 <td>
-                    <button type="button" class="btn btn-outline-secondary">
+                    <span>@i.Name</span>
+                    @if(i.AdultRating >= 18)
+                    {
+                        <span class="badge bg-primary">Adult movie</span>
+                    }
+                </td>
+                <td>
+                    else
+                    {
+                        <span>@i.AdultRating</span>
+                    }
+                </td>
+                <td>@(string.Join(" ",i.Genres))</td>
+                <td>
+                    @if(i.Rating > 4.2)
+                    {
+                        <span class="badge bg-success">Recomend to watch</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary"></span>
+                    }
+                </td>
+                <td>@i.Rating</td>
+                <td>
+                    <a class ="btn btn-outline-secondary" asp-controller="Films" asp-action="Details" asp-route-id="@i.Id">
                         <i class="bi bi-info-square-fill"></i>
-                    </button>
+                    </a>
                     <a class="btn btn-outline-warning" asp-controller="Films" asp-action="Edit" asp-route-id="@i.Id">
                         <i class="bi bi-pencil-fill"></i>
                     </a>
                     <a class="btn btn-outline-danger" asp-controller="Films" asp-action="Create" asp-route-id="@i.Id">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                    <a class="btn btn-outline-danger" asp-controller="Films" asp-action="Delete" asp-route-id="@i.Id">
                         <i class="bi bi-trash-fill"></i>
                     </a>
                 </td>
@@ -40,3 +73,5 @@
         }
     </tbody>
 </table>
+
+<p>Count: @Model.Count</p>

@@ -21,7 +21,7 @@ namespace Core.Validators
                 .InclusiveBetween(1, 5);
             RuleFor(x => x.AdultRating)
                .InclusiveBetween(0, 21);
-            RuleFor(x => x.FilmGenres)
+            RuleFor(x => x.Genres)
                 .NotNull()
                 .NotEmpty();
         }

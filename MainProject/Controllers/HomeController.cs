@@ -1,6 +1,7 @@
 ﻿using Data;
 using MainProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace MainProject.Controllers
@@ -18,7 +19,11 @@ namespace MainProject.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var movies = context.Movie
+               .Include(x => x.FilmGenres) // LEFT JOIN
+               .ToList();
+
+            return View(movies); 
         }
 
         public IActionResult Privacy()
