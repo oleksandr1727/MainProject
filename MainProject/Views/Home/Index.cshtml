@@ -33,7 +33,7 @@
                         </a>
                     </h5>
                     <p class="card-text">@i.Lenght - @i.Rating</p>
-                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@i.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Favorites</a>
+                    <a asp-controller="Favorites" asp-action="Add" asp-route-id="@i.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Favorites</a>
                 </div>
             </div>
         </div>

@@ -49,7 +49,7 @@ namespace MainProject.Controllers
                 LoadCategories();
                 return View("Upser", model);
             }
-
+            //пофіксити створення за допомогою if/ellse (Edit true/false)
             context.Movie.Add(model);
             context.SaveChanges();
 

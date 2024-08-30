@@ -22,7 +22,7 @@ namespace MainProject.Services
 
         public List<MovieDto> GetProducts()
         {
-            var ids = httpContext.Session.Get<List<int>>("favorite_items") ?? new();
+            var ids = httpContext.Session.Get<List<int>>("cart_items") ?? new();
 
             var products = context.Movie.Include(x => x.FilmGenres).Where(x => ids.Contains(x.Id)).ToList();
 
